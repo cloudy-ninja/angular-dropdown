@@ -1,0 +1,46 @@
+<div class="searchable-select-list">
+    <div ng-if="!showInDropDown">
+        <div class="list-group">
+            <div class="list-group-item">
+                <strong>{{label}}</strong>
+            </div>
+            <div class="list-group-item">
+                <div class="input-group">
+                    <input type="search" ng-model="search.Name" class="form-control" placeholder="search" />
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                </div>
+            </div>
+            <div class="item-list">
+                <label class="list-group-item" ng-if="!model.allItems">
+                    Loading...
+                </label>
+                <button ng-repeat="item in model.allItems | filter:search" type="button" class="list-group-item"
+                    ng-class="{active:model.selectedItem == item, 'list-group-item-warning': item[warningProperty]}"
+                    ng-click="select(item)">
+                    {{item.Name}}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div ng-if="showInDropDown">
+        <div class="btn-group"  uib-dropdown>
+            <button type="button" class="btn btn-default" uib-dropdown-toggle>
+                {{model.selectedItem.Name || label}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" uib-dropdown-menu>
+                <li ng-click="$event.stopPropagation()">
+                    <div class="input-group">
+                        <input type="search" ng-model="search.Name" class="form-control" placeholder="search" />
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                    </div>
+                </li>
+                <li ng-if="!model.allItems"><a href>
+                    <label>
+                        Loading...</label>
+                </a></li>
+                <li ng-repeat="item in model.allItems | filter:search" type="button" ng-class="{active:model.selectedItem == item, 'list-group-item-warning': item[warningProperty]}"
+                    ng-click="select(item)"><a href>{{item.Name}}</a> </li>
+            </ul>
+        </div>
+    </div>
+</div>
