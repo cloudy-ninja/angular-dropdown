@@ -1,0 +1,31 @@
+<div>
+    <div class="filter-entity-dropdown" style="margin-bottom: 15px;">
+        <label class="control-label">
+            {{ label }}</label>
+        <div class="row">
+            <div class="col-md-9">
+                <select class="form-control input-sm" ng-model="selectedItem" ng-options="item as item.Name for item in model.unselectedItems"
+                    ng-disabled="ngDisabled">
+                </select>
+            </div>
+            <div class="col-md-3" style="padding-left: 0;">
+                <button type="button" class="btn btn-success" ng-click="addToListBox()" ng-disabled="disabled || !selectedItem">
+                    <i class="glyphicon glyphicon-plus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <table class="table filter-group-item-table">
+        <tbody>
+            <tr ng-repeat="item in model.selectedItems">
+                <td>
+                    <button ng-disabled="disabled" type="button" class="btn btn-danger btn-sm" style="border-radius: 50% !important;
+                        padding: 3px; float: right" ng-click="removeFromSelectedList(item, $index)">
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </button>
+                    {{ item.Name }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
